@@ -1,0 +1,35 @@
+{
+  "command.giveghostitem.success": "§e[Client] item local added",
+  "command.giveghostitem.creative": "§a[Client] ghost-item given successfully",
+  "command.giveghostitem.failure": "Failed to generate ghost item",
+
+  "command.ghostblock.fill.success": "%s ghost blocks filled",
+  "command.ghostblock.set.success": "Ghost block placed",
+  "command.ghostblock.unloaded": "This positon is unloaded",
+  "command.ghostblock.warning": "Warning: This feature can ban you from servers because of flying.",
+  "command.ghostblock.enable": "Enable here",
+  "command.ghostblock.click": "Enable",
+
+  "command.ghostenable.success": "Successfully enabled",
+
+  "command.ghostentities.success": "§a[Client] ghost entity spawned",
+  "command.clearallghostentities.no_current_entities": "No active ghost entities found",
+  "command.clearallghostentities.success": "§a[Client] %s ghost entities successfully removed",
+
+  "command.ghostparticle.success": "Spawned ghostparticle",
+
+  "command.ghostinfo.player_info": "---- PLAYER INFO ----\n",
+  "command.ghostinfo.profile_name": "Profile name",
+  "command.ghostinfo.uuid": "UUID",
+  "command.ghostinfo.general_info": "---- GENERAL INFO ----\n",
+  "command.ghostinfo.coordinates": "Coordinates",
+  "command.ghostinfo.rotation": "Rotation",
+  "command.ghostinfo.armor": "Armor",
+  "command.ghostinfo.effects": "Active effects",
+  "command.ghostinfo.deathlocation": "Last death location",
+  "command.ghostinfo.difficulty": "Difficulty",
+  "command.ghostinfo.inventory": "---- INVENTORY ----\n",
+  "command.ghostinfo.mainhand": "Main-hand item",
+  "command.ghostinfo.offhand": "Off-hand item",
+  "command.ghostinfo.attributes": "Attributes"
+}

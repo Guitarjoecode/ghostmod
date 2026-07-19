@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "ghostmod",
+	"version": "${version}",
+	"name": "GhostMod",
+	"description": "Client-side commands to easily spawn and manage ghost items, blocks and entities",
+	"authors": [
+		"Guitarjoe"
+	],
+	"contact": {
+		"homepage": "https://github.com/Guitarjoecode/",
+		"sources": "https://github.com/Guitarjoecode/"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/ghostmod/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.ghostmod.client.GhostModClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
