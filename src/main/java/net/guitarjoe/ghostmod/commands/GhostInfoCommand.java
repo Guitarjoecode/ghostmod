@@ -1,9 +1,8 @@
-package net.ghostmod.client.commands;
+package net.guitarjoe.ghostmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.Minecraft;
@@ -11,7 +10,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
-
 
 public class GhostInfoCommand {
 

@@ -18,7 +18,7 @@ A client-side utility mod that simplifies the generation and management of ghost
 
 `/ghostitem minecraft:command_block 5` Gives you 5 ghost command blocks
 
-`/ghostentity minecraft:warden ~ ~ ~` Summons a ghost warden at your position
+`/ghostentity minecraft:warden` Summons a ghost warden at your position
 
 `/ghostentity clear` Clears all ghost entities
 

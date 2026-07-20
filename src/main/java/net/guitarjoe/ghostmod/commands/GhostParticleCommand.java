@@ -1,4 +1,4 @@
-package net.ghostmod.client.commands;
+package net.guitarjoe.ghostmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;

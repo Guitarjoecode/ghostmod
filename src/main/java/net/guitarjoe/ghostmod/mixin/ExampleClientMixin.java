@@ -1,4 +1,4 @@
-package net.ghostmod.client.mixin;
+package net.guitarjoe.ghostmod.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "net.ghostmod.client.mixin",
+	"package": "net.guitarjoe.ghostmod.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"ExampleClientMixin"

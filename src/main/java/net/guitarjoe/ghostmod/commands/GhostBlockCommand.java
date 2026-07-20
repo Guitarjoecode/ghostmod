@@ -1,4 +1,4 @@
-package net.ghostmod.client.commands;
+package net.guitarjoe.ghostmod.commands;
 
 /*
  * Copyright (c) 2021 Earthcomputer
@@ -21,18 +21,16 @@ package net.ghostmod.client.commands;
  * <http://www.gnu.org/licenses/>.
  */
 
-
 /*
  * Origin Sources: https://github.com/Earthcomputer/clientcommands/blob/fabric/src/main/java/net/earthcomputer/clientcommands/command/GhostBlockCommand.java
  */
-
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.ghostmod.client.GhostModClient;
+import net.guitarjoe.ghostmod.GhostModClient;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.commands.CommandBuildContext;

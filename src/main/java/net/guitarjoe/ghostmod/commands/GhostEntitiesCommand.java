@@ -1,4 +1,4 @@
-package net.ghostmod.client.commands;
+package net.guitarjoe.ghostmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -19,7 +19,6 @@ import static dev.xpple.clientarguments.arguments.CBlockPosArgument.*;
 import static dev.xpple.clientarguments.arguments.CResourceArgument.getEntityType;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.*;
 
-
 public class GhostEntitiesCommand {
     private static final java.util.Set<Integer> spawnedGhostEntityIds = new java.util.HashSet<>();
 
@@ -28,12 +27,16 @@ public class GhostEntitiesCommand {
                 .then(literal("clear")
                         .executes(ctx -> clearAllGhostEntities(ctx.getSource())))
                 .then(argument("entity", net.minecraft.commands.arguments.ResourceArgument.resource(context, net.minecraft.core.registries.Registries.ENTITY_TYPE))
+                        .executes(ctx -> spawnGhostEntity(
+                                ctx.getSource(),
+                                getEntityType(ctx, "entity"),
+                                ctx.getSource().getPlayer().blockPosition()))
                         .then(argument("pos", blockPos())
                                 .executes(ctx -> spawnGhostEntity(
                                         ctx.getSource(),
                                         getEntityType(ctx, "entity"),
-                                        getLoadedBlockPos(ctx, "pos")
-                                )))));
+                                        getLoadedBlockPos(ctx, "pos"))
+                                ))));
     }
 
     private static int spawnGhostEntity(FabricClientCommandSource source, Holder.Reference<EntityType<?>> entityTypeHolder, BlockPos pos) throws CommandSyntaxException {

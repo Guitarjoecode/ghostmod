@@ -1,16 +1,15 @@
-package net.ghostmod.client.commands;
+package net.guitarjoe.ghostmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.ghostmod.client.GhostModClient;
-import net.minecraft.commands.CommandBuildContext;
+import net.guitarjoe.ghostmod.GhostModClient;
 import net.minecraft.network.chat.Component;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.*;
 
 public class GhostEnableCommand {
-    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandBuildContext context) {
+    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(literal("ghostenable")
                 .then(literal("ghostblocks")
                         .executes(ctx -> ghostEnable(ctx.getSource()))));

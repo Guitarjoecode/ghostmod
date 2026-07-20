@@ -9,14 +9,14 @@
 	],
 	"contact": {
 		"homepage": "https://github.com/Guitarjoecode/",
-		"sources": "https://github.com/Guitarjoecode/"
+		"sources": "https://github.com/Guitarjoecode/ghostmod"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/ghostmod/icon.png",
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"net.ghostmod.client.GhostModClient"
+			"net.guitarjoe.ghostmod.GhostModClient"
 		]
 	},
 	"depends": {
