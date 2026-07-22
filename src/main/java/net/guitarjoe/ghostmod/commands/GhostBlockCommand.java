@@ -30,15 +30,11 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.guitarjoe.ghostmod.GhostModClient;
-import net.minecraft.ChatFormatting;
+import net.guitarjoe.ghostmod.util.ModUtils;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.HoverEvent;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -73,13 +69,12 @@ public class GhostBlockCommand {
 
     private static int setGhostBlock(FabricClientCommandSource source, BlockPos pos, BlockState state) throws CommandSyntaxException {
         ClientLevel level = source.getLevel();
-        assert level != null;
 
-        if (check_GhostBlocks_enabled(source)) {
+        if (ModUtils.check_GhostBlocks_enabled(source)) {
             return 0;
         }
 
-        checkLoaded(level, pos);
+        ModUtils.checkLoaded(level, pos);
 
         boolean result = level.setBlock(pos, state, 18);
         if (result) {
@@ -92,14 +87,13 @@ public class GhostBlockCommand {
 
     private static int fillGhostBlocks(FabricClientCommandSource source, BlockPos from, BlockPos to, BlockState state, Predicate<BlockInWorld> filter) throws CommandSyntaxException {
         ClientLevel level = source.getLevel();
-        assert level != null;
 
-        if (check_GhostBlocks_enabled(source)) {
+        if (ModUtils.check_GhostBlocks_enabled(source)) {
             return 0;
         }
 
-        checkLoaded(level, from);
-        checkLoaded(level, to);
+        ModUtils.checkLoaded(level, from);
+        ModUtils.checkLoaded(level, to);
 
         BoundingBox range = BoundingBox.fromCorners(from, to);
         int successCount = 0;
@@ -119,34 +113,4 @@ public class GhostBlockCommand {
 
         return Command.SINGLE_SUCCESS;
     }
-
-    private static void checkLoaded(ClientLevel level, BlockPos pos) throws CommandSyntaxException {
-        if (!level.isInWorldBounds(pos)) {
-            throw OUT_OF_WORLD_EXCEPTION.create();
-        }
-        if (!level.isLoaded(pos)) {
-            throw UNLOADED_EXCEPTION.create();
-        }
-    }
-
-    private static boolean check_GhostBlocks_enabled(FabricClientCommandSource source) {
-        if (!GhostModClient.Ghostblocks_Enabled) {
-            MutableComponent text = Component.translatable("command.ghostblock.enable");
-
-            Component message = text.withStyle(style -> style.applyFormat(ChatFormatting.UNDERLINE)
-                    .withColor(ChatFormatting.RED)
-                    .withClickEvent(new ClickEvent.RunCommand("/ghostenable ghostblocks"))
-                    .withHoverEvent(new HoverEvent.ShowText(Component.translatable("command.ghostblock.click"))));
-
-            Component warnung = Component.translatable("command.ghostblock.warning")
-                    .withStyle(style -> style.applyFormat(ChatFormatting.YELLOW));
-
-            source.sendFeedback(warnung);
-            source.sendFeedback(message);
-            return true;
-        }
-        return false;
-    }
-
-
 }

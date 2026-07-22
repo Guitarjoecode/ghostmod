@@ -41,7 +41,6 @@ public class GhostEntitiesCommand {
 
     private static int spawnGhostEntity(FabricClientCommandSource source, Holder.Reference<EntityType<?>> entityTypeHolder, BlockPos pos) throws CommandSyntaxException {
         ClientLevel level = source.getLevel();
-        assert level != null;
 
         Entity entity = entityTypeHolder.value().create(level, EntitySpawnReason.COMMAND);
         if (entity == null) {
@@ -62,7 +61,6 @@ public class GhostEntitiesCommand {
 
     private static int clearAllGhostEntities(FabricClientCommandSource source) {
         ClientLevel level = source.getLevel();
-        assert level != null;
 
         if (spawnedGhostEntityIds.isEmpty()) {
             source.sendFeedback(Component.translatable("command.clearallghostentities.no_current_entities"));

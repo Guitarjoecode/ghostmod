@@ -7,13 +7,12 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 public class GhostInfoCommand {
 
-    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandBuildContext context) {
+    public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
         dispatcher.register(ClientCommands.literal("ghostinfo")
                 .executes(GhostInfoCommand::ghostInfo));
     }
@@ -36,10 +35,10 @@ public class GhostInfoCommand {
         sendStat("command.ghostinfo.coordinates", coordinates);
         sendStat("command.ghostinfo.rotation", rotation);
         sendStat("command.ghostinfo.armor", player.getArmorValue()); //armor
-        if (client.player.getActiveEffects().isEmpty()) {
+        if (player.getActiveEffects().isEmpty()) {
             sendStat("command.ghostinfo.effects", "none");
         } else {
-            String Effects = client.player.getActiveEffects().stream()
+            String Effects = player.getActiveEffects().stream()
                     .map(effect -> {
                         String effectId = net.minecraft.core.registries.BuiltInRegistries.MOB_EFFECT
                                 .getKey(effect.getEffect().value())

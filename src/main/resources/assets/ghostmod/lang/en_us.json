@@ -31,5 +31,7 @@
   "command.ghostinfo.inventory": "---- INVENTORY ----\n",
   "command.ghostinfo.mainhand": "Main-hand item",
   "command.ghostinfo.offhand": "Off-hand item",
-  "command.ghostinfo.attributes": "Attributes"
+
+  "command.ghostdestroy.success": "Ghost-destroyed block",
+  "command.ghostdestroy.failed": "Failed to ghost-destroy block"
 }

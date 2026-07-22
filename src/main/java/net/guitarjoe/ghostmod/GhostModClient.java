@@ -20,9 +20,10 @@ public class GhostModClient implements ClientModInitializer {
 		GhostBlockCommand.register(dispatcher, context);
 		GhostEnableCommand.register(dispatcher);
 		GhostEntitiesCommand.register(dispatcher, context);
-		GhostInfoCommand.register(dispatcher, context);
+		GhostInfoCommand.register(dispatcher);
 		GhostItemCommand.register(dispatcher, context);
 		GhostParticleCommand.register(dispatcher, context);
+		GhostDestroyBlockCommand.register(dispatcher);
 	}
 
 }
