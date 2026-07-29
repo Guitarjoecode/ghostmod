@@ -26,11 +26,15 @@ public class GhostDestroyBlockCommand {
     private static int destroyBlock(FabricClientCommandSource source, BlockPos pos) throws CommandSyntaxException {
         ClientLevel level = source.getLevel();
 
+        if (ModUtils.check_GhostBlocks_enabled(source)) {
+            return 0;
+        }
+
         ModUtils.checkLoaded(level, pos);
 
         if (level.destroyBlock(pos, true)) {
             source.sendFeedback(Component.translatable("command.ghostdestroy.success"));
-            return  Command.SINGLE_SUCCESS;
+            return Command.SINGLE_SUCCESS;
         } else {
             throw DESTROY_FAILED_EXCEPTION.create();
         }
