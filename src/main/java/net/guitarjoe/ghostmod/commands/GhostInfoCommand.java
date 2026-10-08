@@ -2,23 +2,26 @@ package net.guitarjoe.ghostmod.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.context.CommandContext;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.*;
 
 public class GhostInfoCommand {
 
     public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
-        dispatcher.register(ClientCommands.literal("ghostinfo")
-                .executes(GhostInfoCommand::ghostInfo));
+        dispatcher.register(literal("ghostinfo")
+                .executes(ctx -> ghostInfo(ctx.getSource())));
     }
 
-    private static int ghostInfo(CommandContext<FabricClientCommandSource> context) {
-        FabricClientCommandSource source = context.getSource();
+    private static int ghostInfo(FabricClientCommandSource source) {
         Minecraft client = source.getClient();
         ClientLevel level = source.getLevel();
         Player player = client.player;
@@ -68,6 +71,13 @@ public class GhostInfoCommand {
         sendStat("command.ghostinfo.mainhand", player.getMainHandItem());
         sendStat("command.ghostinfo.offhand", player.getOffhandItem());
 
+        source.sendFeedback(Component.translatable("command.ghostinfo.players"));
+
+        List<AbstractClientPlayer> players = level.players();
+        String names = players.stream()
+                .map(AbstractClientPlayer::getScoreboardName)
+                .collect(Collectors.joining(", "));
+        sendStat("command.ghostinfo.players_online", names);
 
         return Command.SINGLE_SUCCESS;
     }

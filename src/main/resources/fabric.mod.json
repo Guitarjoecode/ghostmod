@@ -12,7 +12,7 @@
 		"issues": "https://github.com/Guitarjoecode/ghostmod/issues",
 		"sources": "https://github.com/Guitarjoecode/ghostmod"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/ghostmod/icon.png",
 	"environment": "client",
 	"entrypoints": {
@@ -22,7 +22,7 @@
 	},
 	"depends": {
 		"fabricloader": ">=0.19.3",
-		"minecraft": "~26.1.2",
+		"minecraft": "~26.2",
 		"java": ">=25",
 		"fabric-api": "*"
 	}
