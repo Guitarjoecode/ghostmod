@@ -32,7 +32,7 @@ A client-side utility mod that simplifies the generation and management of ghost
 
 ## Minecraft version
 
-Supported Minecraft versions: `26.1`
+Supported Minecraft versions: `26.1`,`26.2`
 
 The latest versions will be coming soon.
 
