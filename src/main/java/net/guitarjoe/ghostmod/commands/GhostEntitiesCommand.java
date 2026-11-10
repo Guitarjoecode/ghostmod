@@ -4,11 +4,13 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import dev.xpple.clientarguments.arguments.CResourceArgument;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -16,7 +18,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.phys.Vec3;
 
 import static dev.xpple.clientarguments.arguments.CBlockPosArgument.*;
-import static dev.xpple.clientarguments.arguments.CResourceArgument.getEntityType;
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.*;
 
 public class GhostEntitiesCommand {
@@ -26,34 +27,34 @@ public class GhostEntitiesCommand {
         dispatcher.register(literal("ghostentity")
                 .then(literal("clear")
                         .executes(ctx -> clearAllGhostEntities(ctx.getSource())))
-                .then(argument("entity", net.minecraft.commands.arguments.ResourceArgument.resource(context, net.minecraft.core.registries.Registries.ENTITY_TYPE))
+                .then(argument("entity", CResourceArgument.resource(context, Registries.ENTITY_TYPE))
                         .executes(ctx -> spawnGhostEntity(
                                 ctx.getSource(),
-                                getEntityType(ctx, "entity"),
+                                CResourceArgument.getSummonableEntityType(ctx, "entity"),
                                 ctx.getSource().getPlayer().blockPosition()))
                         .then(argument("pos", blockPos())
                                 .executes(ctx -> spawnGhostEntity(
                                         ctx.getSource(),
-                                        getEntityType(ctx, "entity"),
+                                        CResourceArgument.getSummonableEntityType(ctx, "entity"),
                                         getLoadedBlockPos(ctx, "pos"))
                                 ))));
     }
 
-    private static int spawnGhostEntity(FabricClientCommandSource source, Holder.Reference<EntityType<?>> entityTypeHolder, BlockPos pos) throws CommandSyntaxException {
+    private static int spawnGhostEntity(FabricClientCommandSource source, Holder.Reference<EntityType<?>> entity, BlockPos pos) throws CommandSyntaxException {
         ClientLevel level = source.getLevel();
 
-        Entity entity = entityTypeHolder.value().create(level, EntitySpawnReason.COMMAND);
-        if (entity == null) {
+        Entity gentity = entity.value().create(level, EntitySpawnReason.COMMAND);
+        if (gentity == null) {
             throw new SimpleCommandExceptionType(Component.translatable("commands.summon.failed")).create();
         }
 
-        entity.setPos(new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5));
+        gentity.setPos(new Vec3(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5));
 
         int clientEntityId = -(level.getEntityCount() + 500);
-        entity.setId(clientEntityId);
+        gentity.setId(clientEntityId);
 
         spawnedGhostEntityIds.add(clientEntityId);
-        level.addEntity(entity);
+        level.addEntity(gentity);
 
         source.sendFeedback(Component.translatable("command.ghostentities.success"));
         return Command.SINGLE_SUCCESS;

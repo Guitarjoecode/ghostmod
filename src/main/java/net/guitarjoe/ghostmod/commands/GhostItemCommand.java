@@ -15,6 +15,7 @@ import net.minecraft.commands.arguments.item.ItemInput;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Prediction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.nbt.CompoundTag;
@@ -55,7 +56,7 @@ public class GhostItemCommand {
             source.sendFeedback(Component.translatable("command.giveghostitem.creative"));
         } else {
             if (!client.player.getInventory().add(targetItem)) {
-                client.player.drop(targetItem, false);
+                client.player.drop(targetItem, false, Prediction.PREDICTED);
             }
             source.sendFeedback(Component.translatable("command.giveghostitem.success"));
         }
